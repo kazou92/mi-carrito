@@ -7,14 +7,22 @@ listaVisivle.classList.toggle("nav-visible")
 })
 
 
-const article =[{
+
+const Producto = document.getElementById('product-class')
+
+let articulosHTML = ''
+
+
+let articles =[{
     id:1,
+    price:100,
     name:"article1",
     image :'https://picsum.photos/250/250?random=2',
     descrispcion:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
 },
 {
     id:2,
+    price:200,
     name:"article2",
     image :'https://picsum.photos/250/250?random=2',
     descrispcion:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
@@ -22,7 +30,111 @@ const article =[{
 },
 {
     id:3,
+    price:300,
     name:"article3",
     image :'https://picsum.photos/250/250?random=2',
     descrispcion:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
 }]
+
+
+for (let article of articles) {
+    articulosHTML += `
+    <div class="wrapper__product">
+      <div class="wrapper__product-img">
+        <img src="${article.image}" alt="${article.name}" class="wrapper__product-img-item">
+      </div>
+      <div class="wrapper__product-content">
+        <h3 class="wrapper__product-title">${article.name}</h3>
+        <p class="wrapper__product-text">
+        ${article.descrispcion}
+        </p>
+        <div class="wrapper__product-btn">
+        <span class="wrapper__product-btn-text">$ ${article.price}</span>
+          <button class="wrapper__product-btn-item" data-id="${article.id}">
+            <i class='bx bx-shopping-bag'></i>
+            <span class="wrapper__product-btn-text">Add to Cart</span>
+          </button>
+        </div>
+      </div>
+      </div>
+    `
+  }
+  Producto.insertAdjacentHTML('beforeend', articulosHTML);
+
+  let miCart = [];
+
+  function trouver(id){
+      
+      for(article of articles){
+      if(article.id ==id){
+        return article
+      
+
+      }
+    }  
+  }
+   function addToCart(id){
+       const produit=trouver(id)
+       miCart.push(produit)
+   }
+
+   
+
+   Producto.addEventListener("click",function(e){
+      /* console.log("sa mw peze a",e.target)
+       console.log("sa ki f sa mw peze a paret la",e.currentTarget)*/
+       if(e.target.closest(".wrapper__product-btn-item")){
+           
+           const ident = e.target.closest(".wrapper__product-btn-item").dataset.id
+           addToCart(+ident)
+           console.log(miCart)
+           actualizar()
+           
+       }
+   })
+
+
+   const endler =document.getElementById("envol-car")
+
+   function actualizar(){
+       let miCartHtml =[]
+       for(miProducto of miCart){
+           miCartHtml +=`
+           <div class="cart__item">
+           <div class="cart__item-img">
+           <img src="${article.image}" alt="${article.name}" class="cart__item-img-item">
+           </div>
+           <div class="cart__item-content">
+           <h3 class="cart__item-title">${article.name}</h3>
+           <p class="cart__item-text">
+           ${article.descrispcion}
+           </p>
+           <div class="cart__item-btn">
+           <span class="cart__item-btn-text">$ ${article.price}</span>
+           <button class="cart__item-btn-item" data-id="${article.id}">
+           <i class="fa-solid fa-xmark"></i>
+           </button>
+           </div>
+           </div>
+           </div>
+
+           `
+
+       }
+       const totalista =document.getElementById("car-total")
+       //add()
+       endler.innerHTML = miCartHtml.length>0? miCartHtml:"<p>No hay productos </p>"
+       totalista.innerText = `$ ${add()}`
+   }
+   actualizar()
+
+  
+
+   function add(){
+    let sum =0
+       for(article of miCart){
+       sum +=article.price
+       
+       }
+       return sum
+   }
