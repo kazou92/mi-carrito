@@ -24,7 +24,7 @@ let articles =[{
     id:2,
     price:200,
     name:"article2",
-    image :'https://picsum.photos/250/250?random=2',
+    image :'https://picsum.photos/250/250?random=3',
     descrispcion:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
 
 },
@@ -32,7 +32,7 @@ let articles =[{
     id:3,
     price:300,
     name:"article3",
-    image :'https://picsum.photos/250/250?random=2',
+    image :'https://source.unsplash.com/random/320x320/',
     descrispcion:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.'
 }]
 
@@ -138,3 +138,30 @@ for (let article of articles) {
        }
        return sum
    }
+   function removeFromCart (id) {
+    let newArr = []
+    for (let article of miCart) {
+      if(article.id !== id) {
+        newArr.push(article)
+      }
+    }
+    miCart = newArr
+  }
+  
+  endler.addEventListener('click', function (e) {
+    if (e.target.closest('.cart__item-btn-item')) {
+      const id = e.target.closest('.cart__item-btn-item').dataset.id
+      removeFromCart(+id)
+      actualizar()
+    }
+  })
+
+  const checkout = document.getElementById('check-in')
+
+checkout.addEventListener('click', function (e) {
+  if(e.target.closest('.wrapper__sidebar-cart-btn-link')) {
+    alert('Gracias por tu compra')
+    miCart = []
+    actualizar()
+  }
+})

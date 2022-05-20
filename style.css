@@ -19,6 +19,7 @@
     display: flex;
     gap: 10px;
     list-style: none;
+    cursor: pointer;
 }
 .odige{
     padding-left: 150px;
@@ -78,7 +79,7 @@
        flex-direction: row;
    }
    .contenairs-car{
-       width: 30%;
+       width: 40%;
    }
    .principal-container{
        width: 70%;
@@ -86,4 +87,15 @@
   }
   .envol-car{
       padding: 20px;
+  }
+  .pied1{
+      width: 100%;
+      background-color: coral;
+      margin: 10px auto;
+  }
+  .footer__copy{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90px;
   }
