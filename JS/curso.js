@@ -87,7 +87,7 @@ for (let article of articles) {
            
            const ident = e.target.closest(".wrapper__product-btn-item").dataset.id
            addToCart(+ident)
-           console.log(miCart)
+           
            actualizar()
            
        }
@@ -102,16 +102,16 @@ for (let article of articles) {
            miCartHtml +=`
            <div class="cart__item">
            <div class="cart__item-img">
-           <img src="${article.image}" alt="${article.name}" class="cart__item-img-item">
+           <img src="${miProducto.image}" alt="${miProducto.name}" class="cart__item-img-item">
            </div>
            <div class="cart__item-content">
-           <h3 class="cart__item-title">${article.name}</h3>
+           <h3 class="cart__item-title">${miProducto.name}</h3>
            <p class="cart__item-text">
-           ${article.descrispcion}
+           ${miProducto.descrispcion}
            </p>
            <div class="cart__item-btn">
-           <span class="cart__item-btn-text">$ ${article.price}</span>
-           <button class="cart__item-btn-item" data-id="${article.id}">
+           <span class="cart__item-btn-text">$ ${miProducto.price}</span>
+           <button class="cart__item-btn-item" data-id="${miProducto.id}">
            <i class="fa-solid fa-xmark"></i>
            </button>
            </div>
@@ -132,7 +132,7 @@ for (let article of articles) {
 
    function add(){
     let sum =0
-       for(article of miCart){
+       for(miProducto of miCart){
        sum +=article.price
        
        }
@@ -140,9 +140,9 @@ for (let article of articles) {
    }
    function removeFromCart (id) {
     let newArr = []
-    for (let article of miCart) {
-      if(article.id !== id) {
-        newArr.push(article)
+    for (let miProducto of miCart) {
+      if(miProducto.id !== id) {
+        newArr.push(miProducto)
       }
     }
     miCart = newArr
