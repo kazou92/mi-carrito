@@ -133,7 +133,7 @@ for (let article of articles) {
    function add(){
     let sum =0
        for(miProducto of miCart){
-       sum +=article.price
+       sum +=miProducto.price
        
        }
        return sum
